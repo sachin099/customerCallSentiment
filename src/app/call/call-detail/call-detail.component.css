@@ -1,0 +1,126 @@
+ol{
+  background: rgb(244,244,244) !important;
+}
+ol li a{
+  color: blue;
+}
+.nav-breadcumb{
+  margin-top: -2%;
+}
+div.card {
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2), 0 1px 6px 0 rgba(0, 0, 0, 0.19);
+  }
+  svg{width:75% !important;}
+  
+  body {
+    background: #292929;
+  }
+  
+  .smile-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    width: 184px;
+    height: 50px;
+  }
+  .smile-icon * {
+    box-sizing: border-box;
+  }
+  .smile-icon .smile {
+  background-color: #fdb900;
+    border: 2px solid #fff;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    float: left;
+    position: relative;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+  }
+  .smile-icon .smile:before, .smile-icon .smile:after {
+    background: #fff;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 24px;
+    transition: all 0.2s ease-in-out;
+    content: "";
+  }
+  .smile-icon .smile:before {
+    left: 10px;
+    float: left;
+  }
+  .smile-icon .smile:after {
+    right: 10px;
+    float: right;
+  }
+  .smile-icon i:before {
+    position: absolute;
+    width: 20px;
+    height: 10px;
+    left: 50%;
+    margin-left: -10px;
+    content: "";
+  }
+  .table td, .table th {
+      padding: .75rem;
+      vertical-align: top;
+      border-top: 1px solid white;
+      border-bottom: 1px solid #dee2e6;
+  }
+  
+  
+  .smile-icon .happy i:before {
+    border-bottom: 2px solid #fff;
+    border-radius: 50px;
+    bottom: 10px;
+  }
+  .smile-icon .happy:hover:after {
+    height: 2px;
+    bottom: 27px;
+  }
+  .smile-icon .bored i:before {
+    border-top: 2px solid #fff;
+    border-radius: 1px;
+    bottom: 1px;
+  }
+  .smile-icon .bored:hover:before, .smile-icon .bored:hover:after {
+    height: 2px;
+    bottom: 27px;
+  }
+  .smile-icon .unhappy i:before {
+    border-top: 2px solid #fff;
+    border-radius: 50px;
+    bottom: 2px;
+  }
+  .smile-icon .unhappy:hover:before, .smile-icon .unhappy:hover:after {
+    background: none;
+    border-bottom: 2px solid #fff;
+    height: 5px;
+  }
+  .smile-icon .item {
+    float: left;
+    width: 48px;
+    text-align: center;
+  }
+  .smile-icon .item:first-child ~ .item {
+    margin-left: 20px;
+  }
+  .smile-icon .item:hover .smile {
+    opacity: 1;
+  }
+  .round{
+    border-radius: 40px!important;
+    margin-bottom: 8px;
+     width: fit-content;
+    }
+    .client{
+    background: #5397ec;
+    }
+    .user{
+    margin-left: auto;
+    }

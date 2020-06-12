@@ -1,0 +1,355 @@
+<navbar></navbar>
+<nav aria-label="breadcrumb" class="nav-breadcumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="">My Universe</a></li>
+        <li class="breadcrumb-item "><a routerLink="/worklist">Worklist</a></li>
+        <li class="breadcrumb-item active">Call Detail</li>
+    </ol>
+</nav>
+<div class="container-fluid row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <form>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-3">
+                                <label class="col-form-label"><b>Batch ID:</b> {{call['batchId']}}</label>
+                            </div>
+                            <div class="col-6">
+                                <label class="col-form-label"><b>Uploaded On:</b> {{call['uploadedOn'] | date:'medium'}}
+                                </label>
+                            </div>
+                            <div class="col-3">
+                                <label class="col-form-label"><b>Uploaded By:</b> {{call['uploadedBy']}}</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <label class="col-form-label"><b>Call ID: </b>{{call['callId']}}</label>
+                            </div>
+                            <div class="col-6">
+                                <label class="col-form-label"><b>Verified On:&nbsp;&nbsp;&nbsp;
+                                    </b>{{call['processedOn'] | date:'medium'}}</label>
+                            </div>
+                            <div class="col-3">
+                                <label class="col-form-label"><b>Verified By:
+                                        &nbsp;&nbsp;</b>{{call['processedBy']}}</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label class="col-form-label"><b>Functionality:</b>{{call['Functionality']}}</label>
+                            </div>
+                            <div class="col-md-9">
+
+                                <label class="col-form-label"><b>Remarks:</b>{{call['remarks']}}</label>
+
+
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true" #remarksModal>
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Manually Verified</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <label for="remarks"></label>
+                                                <textarea style="width: 100%;height: 100px;"
+                                                    placeholder="Please Enter Remarks here" id="remarks" name="remarks"
+                                                    [(ngModel)]="updateObj['remarks']"></textarea>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                                    #closebtn>Close</button>
+                                                <button type="button" class="btn btn-primary"
+                                                    [disabled]="updateObj['remarks']==''"
+                                                    (click)="handleClick()">Verify</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button type="button" class="btn" data-toggle="modal"
+                                    data-target="#exampleModalScrollable"
+                                    style="background-color:rgb(253, 185, 0);margin-right:4px">
+                                    Transcribe
+                                </button>
+                                <button type="button" class="btn btn-info" data-toggle="modal"
+                                    data-target="#exampleModal">
+                                    Verified
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">Conversation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="background:#c3c3c3">
+                    <ul *ngFor="let seq of this.call.Seq" class="list-group list-group-flush">
+                        <li *ngIf="seq.Seq%2==0" class="list-group-item round client">{{seq.Text}}</li>
+                        <li *ngIf="seq.Seq%2==1" class="list-group-item round user">{{seq.Text}}</li>
+
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="row" style="text-align: center;">
+                    <div class="col-md-6">
+                        <!-- <svg viewbox="0 0 100 100">
+                            <circle cx="50" cy="50" r="45" fill="#FDB900" />
+                            <path fill="none" stroke-linecap="round" stroke-width="5" stroke="#fff"
+                                stroke-dasharray="126.5, 126.5" d="M50 10
+                                     a 40 40 0 0 1 0 80
+                                     a 40 40 0 0 1 0 -80" />
+                            <text x="50" y="50" text-anchor="middle" dy="7"
+                                font-size="14">Score:{{call['Score']}}</text>
+                        </svg> -->
+                        <div class="circle" id="circle-a">
+                            <strong>Score:{{call['Score']}}</strong>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <!-- <svg viewbox="0 0 100 100">
+                            <circle cx="50" cy="50" r="45" fill="#FDB900" />
+                            <path fill="none" stroke-linecap="round" stroke-width="5" stroke="#fff"
+                                stroke-dasharray="251.2" d="M50 10
+                                   a 40 40 0 0 1 0 80
+                                   a 40 40 0 0 1 0 -80" />
+                            <text x="50" y="50" text-anchor="middle" dy="7" font-size="14">{{call['status']}}</text>
+                        </svg> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div class="col-md-8 offset-2 row">
+                <div class="col-md-5  offset-1">
+                    <h4 style="font-weight:500">Customer Sentiments</h4>
+                </div>
+                <div class="col-md-5">
+                    <div class="smile-icon">
+
+                        <a class="item unlink" href="javascript:void(0);">
+                            <span class="smile happy" style="background-color: #3ae950;"><i></i></span>
+                            <h6 style="margin:-6px">{{(call['CustPositiveSent'] | number:'1.1-1') + "%"}}</h6>
+                        </a>
+                        <a class="item unlink" href="javascript:void(0);">
+                            <span class="smile bored"><i></i></span>
+                            <h6 style="margin:-6px">{{(call['CustNeutralSentiment']| number:'1.1-1') +"%"}}</h6>
+                        </a>
+                        <a class="item unlink" href="javascript:void(0);">
+                            <span class="smile unhappy" style=" background-color: #e72a2a;"><i></i></span>
+                            <h6 style="margin:-6px">{{call['CustNegativeSent'] | number:'1.1-1' }}%</h6>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <br />
+        </div>
+    </div>
+</div>
+<br />
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+
+            <h4>Call Courtsey</h4>
+            <hr />
+            <div class="col-md-8 offset-2">
+                <table class="table">
+
+                    <tbody>
+                        <tr>
+                            <td style="width: 20%;">
+                                <h5>Opening</h5>
+                            </td>
+                            <td style="width: 60%;">
+                                <h6>Did the agent greet the customer?</h6>
+                            </td>
+                            <td style="width: 20%;">
+                                <img *ngIf="call?.CheckList['generic'][1]" src="assets/img/check.svg"
+                                    style="width: 30px; margin-right: 10px; cursor: pointer">
+                                <img *ngIf="!call?.CheckList['generic'][1]" src="assets/img/cross.svg"
+                                    style="width: 34px;   cursor: pointer">
+                            </td>
+                            <td><img *ngIf="call?.CheckList['generic'][1]" src="assets/img/info.svg"
+                                    style="width: 34px; cursor: pointer" data-toggle="collapse" href="#collapseExample"
+                                    role="button" aria-expanded="false" aria-controls="collapseExample"></td>
+                        </tr>
+                        <tr class="collapse jumbotron" id="collapseExample">
+                            <td colspan="3">
+                                <span *ngFor="let item of call?.CheckList['generic'][1]; let i = index ">
+                                    {{this.call.Seq[call.CheckList['generic'][1][i]].Text}}</span><br />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>Closing</h5>
+                            </td>
+                            <td>
+                                <h6>Did the agent wish the customer before closing the call?</h6>
+                            </td>
+                            <td><img *ngIf="call?.CheckList['generic'][2]" src="assets/img/check.svg" style="width: 30px;
+margin-right: 10px;   cursor: pointer"><img *ngIf="!call?.CheckList['generic'][2]" src="assets/img/cross.svg"
+                                    style="width: 34px;   cursor: pointer"></td>
+                            <td><img *ngIf="call?.CheckList['generic'][2]" src="assets/img/info.svg"
+                                    style="width: 34px; cursor: pointer" data-toggle="collapse" href="#collapseExample1"
+                                    role="button" aria-expanded="false" aria-controls="collapseExample1"></td>
+                        </tr>
+                        <tr class="collapse jumbotron" id="collapseExample1">
+                            <td colspan="3">
+                                <span *ngFor="let item of call?.CheckList['generic'][2]; let i = index ">
+                                    {{this.call.Seq[call.CheckList['generic'][2][i]].Text}}</span><br />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>Additional Assistance</h5>
+                            </td>
+                            <td>
+                                <h6>Did the agent ask for any further additional assistance required before closing the
+                                    call?</h6>
+                            </td>
+                            <td><img *ngIf="call?.CheckList['generic'][3]" src="assets/img/check.svg" style="width: 30px;
+margin-right: 10px;   cursor: pointer"><img *ngIf="!call?.CheckList['generic'][3]" src="assets/img/cross.svg"
+                                    style="width: 34px;   cursor: pointer"></td>
+                            <td><img *ngIf="call?.CheckList['generic'][3]" src="assets/img/info.svg"
+                                    style="width: 34px; cursor: pointer" data-toggle="collapse"
+                                    href="#collapseExample21" role="button" aria-expanded="false"
+                                    aria-controls="collapseExample21"></td>
+                        </tr>
+                        <tr class="collapse jumbotron" id="collapseExample21">
+                            <td colspan="3">
+                                <span *ngFor="let item of call?.CheckList['generic'][3]; let i = index ">
+                                    {{this.call.Seq[call.CheckList['generic'][3][i]].Text}}</span><br />
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h4>Technical Skill</h4>
+            <hr />
+            <div class="col-md-8 offset-2">
+                <table class="table">
+
+                    <tbody>
+                        <tr>
+                            <td style="width: 20%;">
+                                <h5>Recording informed</h5>
+                            </td>
+                            <td style="width: 60%;">
+                                <h6>Did the agent inform if the call is been recorded for quality/monitoring purpose?
+                                </h6>
+                            </td>
+                            <td style="width: 20%;"><img *ngIf="call?.CheckList['generic'][4]"
+                                    src="assets/img/check.svg" style="width: 30px;
+margin-right: 10px;   cursor: pointer"><img *ngIf="!call?.CheckList['generic'][4]" src="assets/img/cross.svg"
+                                    style="width: 34px;   cursor: pointer"></td>
+                            <td><img *ngIf="call?.CheckList['generic'][4]" src="assets/img/info.svg"
+                                    style="width: 34px; cursor: pointer" data-toggle="collapse" href="#collapseExample2"
+                                    role="button" aria-expanded="false" aria-controls="collapseExample2"></td>
+                        </tr>
+                        <tr class="collapse jumbotron" id="collapseExample2">
+                            <td colspan="3">
+                                <span *ngFor="let item of call?.CheckList['generic'][4]; let i = index ">
+                                    {{this.call.Seq[call.CheckList['generic'][4][i]].Text}}</span><br />
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h4>Functionality</h4>
+            <hr />
+            <div class="col-md-8 offset-2">
+                <table class="table">
+
+                    <tbody>
+                        <tr *ngIf="this.call.Functionality==='DNC'">
+                            <td style="width: 20%;">
+                                <h5>DNC</h5>
+                            </td>
+                            <td style="width: 60%;">
+                                <h6>Is this case for DNC (Do Not Call)?</h6>
+                            </td>
+                            <td style="width: 20%;"><img *ngIf="call?.CheckList['custom'][1]" src="assets/img/check.svg"
+                                    style="width: 30px;
+margin-right: 10px;   cursor: pointer"><img *ngIf="!call?.CheckList['custom'][1]" src="assets/img/cross.svg"
+                                    style="width: 34px;   cursor: pointer"></td>
+                            <td><img *ngIf="call?.CheckList['custom'][1]" src="assets/img/info.svg"
+                                    style="width: 34px; cursor: pointer" data-toggle="collapse"
+                                    href="#collapseExample26" role="button" aria-expanded="false"
+                                    aria-controls="collapseExample26"></td>
+                        </tr>
+                        <tr class="collapse jumbotron" id="collapseExample26">
+                            <td colspan="3">
+                                <span *ngFor="let item of call?.CheckList['custom'][1]; let i = index ">
+                                    {{this.call.Seq[call.CheckList['custom'][1][i]].Text}}</span><br />
+
+                            </td>
+                        </tr>
+                        <tr *ngIf="this.call.Functionality==='BadNum'">
+                            <td style="width: 20%;">
+                                <h5>Bad Number</h5>
+                            </td>
+                            <td style="width: 60%;">
+                                <h6>Is Customer saying this is not a correct number?</h6>
+                            </td>
+                            <td style="width: 20%;"><img *ngIf="call?.CheckList['custom'][1]" src="assets/img/check.svg"
+                                    style="width: 30px;
+margin-right: 10px;   cursor: pointer"><img *ngIf="!call?.CheckList['custom'][1]" src="assets/img/cross.svg"
+                                    style="width: 34px;   cursor: pointer"></td>
+                            <td><img *ngIf="call?.CheckList['custom'][1]" src="assets/img/info.svg"
+                                    style="width: 34px; cursor: pointer" data-toggle="collapse"
+                                    href="#collapseExample24" role="button" aria-expanded="false"
+                                    aria-controls="collapseExample24"></td>
+                        </tr>
+                        <tr class="collapse jumbotron" id="collapseExample24">
+                            <td colspan="3">
+                                <span *ngFor="let item of call?.CheckList['custom'][1]; let i = index ">
+                                    {{this.call.Seq[call.CheckList['custom'][1][i]].Text}}<br /></span>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+</div>

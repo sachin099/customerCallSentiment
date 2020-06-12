@@ -1,0 +1,161 @@
+<navbar></navbar>
+<nav aria-label="breadcrumb" class="nav-breadcumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active"><a href="#">My Universe</a></li>
+  </ol>
+</nav>
+
+<div class="modal fade " id="myModal" #myModal role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="model-content">
+      <div class="modal-body">
+        Successfully Analyzed
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger" data-dismiss="modal" (click)="handleClose()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid row">
+
+  <div class="col-md-8">
+    <progress-chart (worklist)="handleChartEvent($event, 'PROGRESS')" [data]="todayData"></progress-chart>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <h4 style="font-size: xx-large;">Summary</h4>
+        <h4 style="font-weight: 400;font-size: Medium;">Total Number of Calls: {{this.summary[0].Volume}}</h4>
+        <h4 style="font-weight: 400;font-size: Medium;">Calls below Threshold: {{this.summary[0].BelowThreshold}}</h4>
+        <h4 style="font-weight: 400;font-size: Medium;">Average Call Score: {{this.summary[0].AverageScore}}</h4>
+
+
+        <hr>
+        <h4 style="font-size: xx-large;">Upload</h4>
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="inputGroupFile01" multiple (change)="handleFileInput($event)"
+            aria-describedby="inputGroupFileAddon01">
+          <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+        </div>
+        <label style="margin-top: 15px;">{{message}}</label>
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75"
+            aria-valuemin="0" aria-valuemax="100" [style.width.%]="progressBarWidth"></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<br />
+<div class="container-fluid">
+  <div class="card ">
+    <div class="card-body">
+      <div class="col-md-12 row">
+        <div class=" col-md-3" style="border-right-style: inset;" *ngFor="let item of batchData">
+          <doughnut-chart [data]="item"></doughnut-chart>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<br />
+<div class="accordion" id="accordionExample">
+  <div class="card" style="background-color:#1b262c!important; margin:15px" data-toggle="collapse"
+    data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+    <div class="card-header row" id="headingOne">
+      <div class="col-md-6 ">
+        <h4 class="mb-0" style="font-weight: 500;color:white;">Daily Compliance and Regulatory Dashboard</h4>
+      </div>
+      <div class="col-md-1 offset-5">
+        <h2 class="mb-0" style="font-weight: 500;color:white;text-align: center;">+</h2>
+      </div>
+    </div>
+
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body" style="background-color: white;">
+        <div class="container-fluid row">
+          <div class="col-md-12">
+            <div class=" card ">
+              <div class="card-body row">
+                <div class="col-md-6" style="text-align: center; border-right-style: inset;">
+                  <h5 style="font-weight: 400">Top 10 Violators</h5>
+                  <canvas id="myHChart" style="width: 100%; max-height:250px"></canvas>
+                </div>
+                <div class="col-md-6" style="text-align: center;">
+                  <h5 style="font-weight: 400">Customer Sentiments</h5>
+                  <canvas id="myPieChart" style="width: 100%; max-height:250px"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="background-color:#1b262c!important; margin:15px" data-toggle="collapse"
+    data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+    <div class="card-header row" id="headingTwo">
+      <div class="col-md-6 ">
+        <h4 class="mb-0" style="font-weight: 500;color:white;">Last 7 Days Analysis</h4>
+      </div>
+      <div class="col-md-1 offset-5">
+        <h2 class="mb-0" style="font-weight: 500;color:white;text-align: center;">+</h2>
+      </div>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body" style="background-color: white;">
+        <div class="container-fluid row">
+          <div class="col-md-12">
+            <div class=" card ">
+              <div class="card-body row">
+                <div class="col-md-6" style="text-align: center; border-right-style: inset;">
+                  <h5 style="font-weight: 400">Call Volume(7 Days)</h5>
+                  <canvas id="myLChart" style="width: 100% ; max-height:250px"></canvas>
+                </div>
+                <div class="col-md-6" style="text-align: center;">
+                  <h5 style="font-weight: 400">Average Score</h5>
+                  <canvas id="myLChart1" style="width: 100% ; max-height:250px"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<div class="container-fluid row">
+  <div class="col-md-4">
+    <div class=" card " style="background-color: #36a2eb;color: white;">
+      <div class="card-body">
+        <h5 style="font-weight: 600; text-align: center;">Weekly</h5>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class=" card " style="background-color: #ffcd56;color: white;">
+      <div class="card-body">
+        <h5 style="font-weight: 600; text-align: center;">Monthly</h5>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class=" card " style="background-color: #ff6384;color: white;">
+      <div class="card-body">
+        <h5 style="font-weight: 600; text-align: center;">Yearly</h5>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<button id="modalBtn" [hidden]="true" data-toggle="modal" data-target="#myModal"></button>

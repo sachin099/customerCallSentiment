@@ -1,0 +1,45 @@
+{
+    "genericList": [
+        {
+            "id": "1",
+            "category": "Call Courtesy",
+            "name":"Opening"
+        },
+        {
+            "id": "2",
+            "category": "Call Courtesy",
+            "name":"Closing"
+        },
+        {
+            "id": "3",
+            "category": "Regulatory",
+            "name":"Call Recording"
+        },
+        {
+            "id": "4",
+            "category": "Regulatory",
+            "name":"Any Medical Condition Asked"
+        },
+
+        {
+            "id": "5",
+            "category": "Call Courtesy",
+            "name":"Additional Assistance Asked"
+        }
+    ],
+    "checklistCategory":[
+        {
+            "id": "1",
+            "name": "Call Courtesy"
+        },
+        {
+            "id": "2",
+            "name": "Regulatory"
+        },
+        {
+            "id": "3",
+            "name": "Technical Skills"
+        }
+
+    ]
+}

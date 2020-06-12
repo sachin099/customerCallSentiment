@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>MyApp</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script><!-- Latest compiled JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script type="text/javascript">
+    var piedata = {
+      datasets: [{
+        data: [20, 30, 50],
+        backgroundColor: ['rgba(255,99,132, 1)', 'rgba(255, 205,86, 1)', 'rgba(54, 162, 235, 1)']
+      }],
+
+      // These labels appear in the legend and in the tooltips when hovering different arcs
+      labels: [
+        'Negative',
+        'Positive',
+        'Neutral'
+      ]
+    };
+    var data = {
+      datasets: [{
+        data: [8, 12, 80],
+        backgroundColor: ['rgba(255,99,132, 1)', 'rgba(255, 205,86, 1)', 'rgba(54, 162, 235, 1)']
+      }],
+
+      // These labels appear in the legend and in the tooltips when hovering different arcs
+      labels: [
+        'PendingAnalysis',
+        'ManuallyCompleted',
+        'AutoAnalyzed'
+      ]
+    };
+    var options = {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+          }
+
+        }]
+      }
+    };
+    var Pieoptions = {
+      responsive: true,
+      legend: {
+        position: 'right',
+        labels: {
+          padding: 20,
+          boxWidth: 10
+        }
+      },
+      plugins: {
+        datalabels: {
+          formatter: (value, ctx) => {
+            let sum = 0;
+            let dataArr = ctx.chart.data.datasets[0].data;
+            dataArr.map(data => {
+              sum += data;
+            });
+            let percentage = (value * 100 / sum).toFixed(2);
+            return percentage;
+          },
+          color: 'white',
+          labels: {
+            title: {
+              font: {
+                size: '16'
+              }
+            }
+          }
+        }
+      }
+
+
+    };
+
+    var horizontalchar = {
+      labels: ['Opening', 'Closing', 'Recording'],
+      datasets: [{
+        label: '# of Label',
+        data: [12, 19, 3],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    };
+    var CallVolumnchar = {
+      labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      datasets: [{
+        label: '# of Label',
+        data: [1200, 1400, 1550, 1423, 1652, 1120, 1023],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 159, 108, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(255, 159, 108, 1)'
+        ],
+        borderWidth: 1
+      }]
+    };
+    var AverageScorechar = {
+      labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      datasets: [{
+        label: '# of Label',
+        data: [75, 83, 88, 72, 79, 91, 86],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 159, 108, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(255, 159, 108, 1)'
+        ],
+        borderWidth: 1
+      }]
+    };
+
+    var Linedata = {
+      datasets: [{
+        data: [10, 20, 30, 12, 25, 35],
+        backgroundColor: ['rgba(255,99,132, 1)', 'rgba(255, 205,86, 1)', 'rgba(54, 162, 235, 1)']
+      }],
+      labels: [
+        'Red',
+        'Blue',
+        'Green',
+        'Brown',
+        'Black'
+      ]
+    };
+
+
+    Chart.defaults.global.defaultFontColor = 'black';
+    Chart.defaults.global.defaultFontSize = 16;
+    var theHelp = Chart.helpers;
+    Chart.plugins.register({
+      afterDatasetsDraw: function (chartInstance, easing) {
+        // To only draw at the end of animation, check for easing === 1
+        var ctx = chartInstance.chart.ctx;
+        chartInstance.data.datasets.forEach(function (dataset, i) {
+          var meta = chartInstance.getDatasetMeta(i);
+          if (!meta.hidden) {
+            meta.data.forEach(function (element, index) {
+              // Draw the text in black, with the specified font
+              ctx.fillStyle = 'black';
+              var fontSize = 16;
+              var fontStyle = 'normal';
+              var fontFamily = 'Helvetica Neue';
+              ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+              // Just naively convert to string for now
+              var dataString = dataset.data[index].toString();
+              // Make sure alignment settings are correct
+              ctx.textAlign = 'center';
+              ctx.textBaseline = 'middle';
+              var padding = 3;
+              var position = element.tooltipPosition();
+              ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+            });
+          }
+        }); 
+      }
+    });
+    window.onload = function () {
+      for (var i = 0; i < 4; i++) {
+        
+
+        var Piectx = document.getElementById('myPieChart');
+        var myPieChart = new Chart(Piectx, {
+          type: 'pie',
+          data: piedata,
+          options: Pieoptions
+        });
+        var Hctx = document.getElementById('myHChart');
+        var myHChart = new Chart(Hctx, {
+          type: 'horizontalBar',
+          data: horizontalchar,
+          options: options
+        });
+        var Lctx = document.getElementById('myLChart');
+        var myLChart = new Chart(Lctx, {
+          type: 'bar',
+          data: CallVolumnchar,
+          options: options
+        });
+        var AverageScore = document.getElementById('myLChart1');
+        var myAverageScore = new Chart(AverageScore, {
+          type: 'bar',
+          data: AverageScorechar,
+          options: options
+        });
+
+
+      }
+
+    }
+  </script>
+
+  <style>
+    div.card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+  </style>
+</head>
+
+<body>
+  <app-root></app-root>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

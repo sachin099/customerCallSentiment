@@ -1,0 +1,26 @@
+<div class="sidenav">
+    <div class="login-main-text">
+        <h2>Machine First Verified<br> Login Page</h2>
+        <p>Login or Change Password from here to access.</p>
+    </div>
+</div>
+<div class="main">
+    <div class="col-md-6 col-sm-12">
+        <div class="login-form">
+            <form>
+                <div class="form-group">
+                    <label>SOE ID</label> 
+                    <input type="text" class="form-control" [(ngModel)] = "request.userId" name="userId"
+                     placeholder="Please Enter your SOE ID here" required> 
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" [(ngModel)] = "request.password" name="password"
+                     placeholder="Please Enter your Password here" required>
+                </div>
+                <button type="submit" class="btn btn-black" (click)="login()">Login</button>
+                <button type="submit" class="btn btn-secondary">Change Password</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+<!-- <nav class="navbar navbar-dark bg-dark" style="background-color:#1b262c!important;">
+    <a class="navbar-brand" href="/">Machine First Verified</a>
+    <form class="form-inline my-2 my-lg-0">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="my-2 m-2" style="color: white;"> ADMIN</a>
+                <button class="btn btn-outline-warning my-2 " type="submit">Scorecard</button>&nbsp;
+                <button class="btn btn-outline-warning my-2 my-sm-0" type="submit"
+                    (click)="handleClick('upload')">Upload File</button>&nbsp;
+                <button class="" type="submit"
+                    (click)="handleClick('configuration')">Configuration</button>&nbsp;
+                        <button class="btn btn-outline-warning my-2 my-sm-0 nav-item dropdown dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Dropdown
+                        </button>
+                        <div class="dropdown-menu my-2 my-sm-0" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="#">Action</a>
+                          <a class="dropdown-item" href="#">Another action</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                <button class="btn btn-primary my-2 my-sm-0" type="submit" (click)="logout()">Logout</button>
+            </li>
+        </ul>
+    </form>
+</nav> -->
+
+<nav class="navbar navbar-dark bg-dark" style="background-color:#1b262c!important;">
+  <a class="navbar-brand" href="/">Machine First Verified</a>
+  <form class="form-inline my-2 my-lg-0 ">
+    <a class="my-2 m-2  mr-sm-2" style="color: white;"> ADMIN</a>
+    <div class="dropdown  mr-sm-2">
+      <button class="btn btn-outline-warning dropdown-toggle" type="button" id="dropdownMenuButton"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Settings
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" (click)="handleClick('checklist')" style="cursor:pointer">Check List</a>
+        <a class="dropdown-item" (click)="handleClick('userprofile')" style="cursor:pointer">User Profile</a>
+        <a class="dropdown-item" href="#">Configuration</a>
+      </div>
+    </div>
+    <button class="btn btn-primary my-2 my-sm-0" type="submit">Logout</button>
+  </form>
+</nav>
+<br />

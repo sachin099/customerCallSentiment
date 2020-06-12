@@ -1,0 +1,18 @@
+<ul class="pagination justify-content-center">
+    <li class="page-item " (click)="goToPage(1)"><a class="page-link" style="cursor: pointer;color: blue;"
+            tabindex="-1">First</a>
+    </li>
+    <li class="page-item " [ngClass]="{'disabled':currentPage<3}" (click)="goToPage(currentPage-1)"><a class="page-link"
+            style="cursor: pointer;color: blue;" tabindex="-1">Previous</a>
+    </li>
+    <li class="page-item " *ngFor="let item of pageList" (click)="goToPage(item)"
+        [ngClass]="{'active':item==currentPage}">
+
+        <a class="page-link " style="cursor: pointer;color: blue;">{{item}}</a>
+
+    </li>
+    <li class="page-item"><a class="page-link" href="#">Next</a> </li>
+    <li class="page-item " (click)="goToPage(totalPage)"><a class="page-link" style="cursor: pointer;color: blue;"
+            tabindex="-1">Last</a>
+    </li>
+</ul>

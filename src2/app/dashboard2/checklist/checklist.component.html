@@ -1,0 +1,321 @@
+<nav aria-label="breadcrumb" class="nav-breadcumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="#">My Universe</a></li>
+        <li class="breadcrumb-item "><a routerLink="/configuration">Settings</a></li>
+        <li class="breadcrumb-item active">CheckList</li>
+    </ol>
+</nav>
+<div class="container-fluid table-responsive" style="height:400px" *ngIf="screen=='MAIN'">
+    <table class="table table-fixed">
+        <thead class="thead-dark" style="position: sticky;top:0">
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Checklist Name</th>
+                <th scope="col">Generic</th>
+                <th scope="col">Specific</th>
+                <th scope="col">Total</th>
+                <th scope="col">Created By</th>
+                <th scope="col">Created Date</th>
+                <th scope="col">Updated By</th>
+                <th scope="col">Updated Date</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody style="overflow-y:scroll;">
+            <tr *ngFor="let functionality of functionalities;let i=index">
+                <th scope="row"><input type="radio" name="RadioButton" value="Button"
+                        (click)="selectFunctionality($event, i)"></th>
+                <td>{{functionality['name']}}</td>
+                <td>{{functionality['generic'].length}}</td>
+                <td>{{functionality['custom'].length}}</td>
+                <td>{{functionality['generic'].length + functionality['custom'].length}}</td>
+                <td>{{functionality['createdBy']}}</td>
+                <td>{{functionality['createdDate']}}</td>
+                <td>{{functionality['updatedBy']}}</td>
+                <td>{{functionality['updatedDate']}}</td>
+                <td>Active</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <div class="" style="position: absolute;bottom: 0;width: 100%;">
+        <div class="wrapper" style="text-align: center;">
+            <button type="button" class="btn btn-primary m-2" (click)="goToScreen('VIEW')">View</button>
+            <button type="button" class="btn btn-primary m-2" (click)="goToScreen('ADD')">Add</button>
+            <button type="button" class="btn btn-primary m-2" (click)="goToScreen('UPDATE')">Update</button>
+            <button type="button" class="btn btn-primary m-2">Delete</button>
+        </div>
+
+    </div>
+</div>
+<div *ngIf="screen == 'ADD'">
+    <div class="container-fluid row">
+        <div class="col-sm-12">
+            <h4>Add New Checklist</h4>
+        </div>
+        <div class="col-sm-4 sm-offset-1">
+            <div class="form-group">
+                <label for="functionName" class="">Function Name</label>
+                <input type="text" [(ngModel)]="functionality.name" class="form-control" id="functionName"
+                    placeholder="Please Enter Name here">
+            </div>
+        </div>
+        <div class="col-sm-6"></div>
+
+        <div class="col-md-6">
+            <h3>Select Generic Items</h3>
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="form-group col-sm-1 ">
+                        Select
+                    </div>
+                    <div class="form-group col-sm-3 ">
+                        <label>Category</label>
+                    </div>
+                    <div class="form-group col-sm-5 ">
+                        <label>Name</label>
+                    </div>
+                    <div class="form-group col-sm-2 ">
+                        Weight
+                    </div>
+                </div>
+                <div class="row" *ngFor="let item of genericList;let i = index">
+                    <div class="form-group col-sm-1 ">
+                        <input type="checkbox" class="form-control" (change)="handleChange($event, item.id, i)">
+                    </div>
+                    <div class="form-group col-sm-3 ">
+                        <label>{{item.category}}</label>
+                    </div>
+                    <div class="form-group col-sm-5 ">
+                        <label>{{item.name}}</label>
+                    </div>
+                    <div class="form-group col-sm-2 ">
+                        <input type="number" [(ngModel)]="item['weight']" class="form-control">
+                    </div>
+                </div>
+
+            </div>
+            <!-- <table cellpadding="10" *ngFor="let item of genericList;let i = index">
+                <tr>
+                    <td style="width:25%">
+                        <input type="checkbox" name="" id="" (change)="handleChange($event, item.id, i)">
+                    </td>
+                    <td style="width:25%">
+                        <h6>{{item.category}}</h6>
+                    </td>
+                    <td style="width:50%">
+                        <h6>{{item.name}}</h6>
+                    </td>
+                    <td style="width:20%">
+                        <input type="number" placeholder="Please Enter Percentage" [(ngModel)]="item['weight']">
+                    </td>
+
+                </tr>
+            </table> -->
+        </div>
+        <div class="col-md-6">
+            <br />
+            <table cellpadding="10">
+                <tr>
+                    <td>
+                        <h6>Add New CheckList Item <button type="submit" (click)="pushCustom()">&#43;</button></h6>
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <table cellpadding="10" style="border-left:solid;color:gray">
+                <tr *ngFor="let customItem of customList;let i = index">
+                    <td style="width:30%">
+                        <select id="dropdownCategory" style="height:26px;" [(ngModel)]="customList[i]['category']">
+                            <option value="">
+                                <h6>Select Category</h6>
+                            </option>
+                            <option *ngFor="let categoryItem of checklistCategory" [value]="categoryItem['name']">
+                                <h6>{{categoryItem['name']}}</h6>
+                            </option>
+                        </select>
+                    </td>
+                    <td style="width:60%">
+                        <input id="checklistName" type="text" placeholder="Enter Name"
+                            [(ngModel)]="customList[i]['name']" />
+                    </td>
+                    <td style="width:5%">
+                        <input id="checklistWeight" type="number" placeholder="Please Enter Percentage"
+                            [(ngModel)]="customList[i]['weight']">
+                    </td>
+                    <td style="width:5%">
+                        <button type="button" class="close" aria-label="Close" (click)="deleteItem(i)">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="" style="position: absolute;bottom: 0;width: 100%;">
+        <div class="wrapper" style="text-align: center;">
+            <button type="button" class="btn btn-primary m-2" (click)="save()">Save</button>
+            <button type="button" class="btn btn-primary m-2" (click)="cancel()">Cancel</button>
+        </div>
+
+    </div>
+</div>
+<div *ngIf="screen == 'UPDATE'">
+    <div class="container-fluid row">
+        <div class="col-md-6">
+            <h4>Update Checklist</h4>
+            <br />
+            <table cellpadding="10">
+                <tr>
+                    <td style="width:50%">
+                        <h6>Functionality</h6>
+                    </td>
+                    <td style="width:50%"><input type="text" [(ngModel)]="selectedFunctionality.name" disabled></td>
+                </tr>
+            </table>
+            <br />
+            <table cellpadding="10" *ngFor="let item of genericList;let i = index">
+                <tr>
+                    <td style="width:25%">
+                        <input type="checkbox" name="" id="" (change)="handleChange($event, item.id, i)">
+                    </td>
+                    <td style="width:25%">
+                        <h6>{{item.category}}</h6>
+                    </td>
+                    <td style="width:50%">
+                        <h6>{{item.name}}</h6>
+                    </td>
+                    <td style="width:20%">
+                        <input type="number" placeholder="Please Enter Percentage" [(ngModel)]="item['weight']">
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <br />
+            <table cellpadding="10">
+                <tr>
+                    <td>
+                        <h6>Add New CheckList Item <button type="submit" (click)="pushCustom()">&#43;</button></h6>
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <table cellpadding="10" style="border-left:solid;color:gray">
+                <tr *ngFor="let customItem of customList;let i = index">
+                    <td style="width:30%">
+                        <select id="dropdownCategory" style="height:26px;" [(ngModel)]="customList[i]['category']">
+                            <option value="">
+                                <h6>Select Category</h6>
+                            </option>
+                            <option *ngFor="let categoryItem of checklistCategory" [value]="categoryItem['name']">
+                                <h6>{{categoryItem['name']}}</h6>
+                            </option>
+                        </select>
+                    </td>
+                    <td style="width:60%">
+                        <input id="checklistName" type="text" placeholder="Enter Name"
+                            [(ngModel)]="customList[i]['name']" />
+                    </td>
+                    <td style="width:5%">
+                        <input id="checklistWeight" type="number" placeholder="Please Enter Percentage"
+                            [(ngModel)]="customList[i]['weight']">
+                    </td>
+                    <td style="width:5%">
+                        <button type="button" class="close" aria-label="Close" (click)="deleteItem(i)">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="" style="position: absolute;bottom: 0;width: 100%;">
+        <div class="wrapper" style="text-align: center;">
+            <button type="button" class="btn btn-primary m-2" (click)="update()">Update</button>
+            <button type="button" class="btn btn-primary m-2" (click)="cancel()">Cancel</button>
+        </div>
+
+    </div>
+</div>
+<div *ngIf="screen == 'VIEW'">
+    <div class="container-fluid row">
+        <div class="col-md-6">
+            <h4>View Checklist</h4>
+            <br />
+            <table cellpadding="10">
+                <tr>
+                    <td style="width:50%">
+                        <h6>Functionality</h6>
+                    </td>
+                    <td style="width:50%"><input type="text" [(ngModel)]="selectedFunctionality.name" disabled></td>
+                </tr>
+            </table>
+            <br />
+            <table cellpadding="10" *ngFor="let item of selectedFunctionality.generic;let i = index">
+                <tr>
+                    <td style="width:25%">
+                        <input type="checkbox" name="" id="" disabled checked>
+                    </td>
+                    <td style="width:25%">
+                        <h6>{{item.category}}</h6>
+                    </td>
+                    <td style="width:50%">
+                        <h6>{{item.name}}</h6>
+                    </td>
+                    <td style="width:20%">
+                        <input type="number" placeholder="Please Enter Percentage" [value]="item['weight']" disabled>
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <br />
+            <table cellpadding="10">
+                <tr>
+                    <td>
+                        <h6>CheckList Items</h6>
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <table cellpadding="10" style="border-left:solid;color:gray">
+                <tr *ngFor="let customItem of selectedFunctionality.custom;let i = index">
+                    <td style="width:30%">
+                        <select id="dropdownCategory" style="height:26px;" [(ngModel)]="customItem['category']"
+                            disabled>
+                            <option value="">
+                                <h6>Select Category</h6>
+                            </option>
+                            <option *ngFor="let categoryItem of checklistCategory" [value]="categoryItem['name']">
+                                <h6>{{categoryItem['name']}}</h6>
+                            </option>
+                        </select>
+                    </td>
+                    <td style="width:60%">
+                        <input id="checklistName" type="text" placeholder="Enter Name" [(ngModel)]="customItem['name']"
+                            disabled />
+                    </td>
+                    <td style="width:5%">
+                        <input id="checklistWeight" type="number" placeholder="Please Enter Percentage"
+                            [(ngModel)]="customItem['weight']" disabled>
+                    </td>
+                    <td style="width:5%">
+                        <button type="button" class="close" aria-label="Close" disabled>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="" style="position: absolute;bottom: 0;width: 100%;">
+        <div class="wrapper" style="text-align: center;">
+            <button type="button" class="btn btn-primary m-2" (click)="cancel()">Close</button>
+        </div>
+
+    </div>
+</div>

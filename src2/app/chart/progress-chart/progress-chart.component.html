@@ -1,0 +1,9 @@
+<div class="card">
+    <div class="card-body">
+
+        <h4 style="font-weight: 400;font-size: xx-large;"><span style="cursor: pointer;text-decoration: underline;" (click)="handleClick()">Today's Progress</span></h4>
+        <div class="col-md-8 offset-md-2">
+            <canvas id="progressChart" (click)="openWorkList($event)" #progressChart>{{chart}}</canvas>
+        </div>
+    </div>
+</div>

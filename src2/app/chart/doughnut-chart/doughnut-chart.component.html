@@ -1,0 +1,6 @@
+<div>
+    <h5 style="font-weight: 400;"><B >Batch <span style="cursor: pointer;text-decoration: underline;" (click)="handleClick()">{{inputData['batchId']}}</span></B></h5>
+<h6 style="font-weight: 400"><B>Uploaded On:</B> {{inputData['uploadedOn'] | date: 'short' }}</h6>
+<canvas id="doughnutChart" style="width: 100%" #doughnutChart>{{chart}}</canvas>
+<h6 style="font-weight: 400"><B>Uploaded By:</B> {{inputData['uploadedBy']}}</h6>
+</div>

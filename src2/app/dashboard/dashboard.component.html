@@ -1,0 +1,114 @@
+<navbar></navbar>
+<nav aria-label="breadcrumb" class="nav-breadcumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item "><a routerLink="">My Universe</a></li>
+        <li class="breadcrumb-item active"><a routerLink="/worklist">Worklist</a></li>
+    </ol>
+</nav>
+<div class="container-fluid">
+    <div class="col-md-12 row p-3">
+        <div class="input-group col-md-1">
+            <label for="name">Batch ID</label>
+            <div>
+                <input type="text" class="form-control" id="text5" [(ngModel)]="filters['batchId']">
+            </div>
+        </div>
+        <div class="input-group col-md-1">
+            <label for="name">Call ID</label>
+            <div>
+                <input type="text" class="form-control" id="text5" [(ngModel)]="filters['callId']">
+            </div>
+        </div>
+        <div class="input-group col-md-2">
+            <label for="name">From date</label>
+            <div>
+                <input type="date" class="form-control" id="text1" [(ngModel)]="from_date">
+            </div>
+        </div>
+        <div class="input-group col-md-2">
+            <label for="name">To date</label>
+            <div>
+                <input type="date" class="form-control" id="text1" [(ngModel)]="to_date">
+            </div>
+        </div>
+        <div class=" col-md-2">
+            <label for="name">Status</label>
+
+            <!-- <div class="dropdown"><button class="btn btn-secondary dropdown-toggle" type="button"
+                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Choose Option
+                </button>
+                <div class="dropdown-menu" id="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Uploaded</a> <a class="dropdown-item" href="#">
+                        AutoAnalyzed</a>
+                    <a class="dropdown-item" href="#">PendingAnalysis</a>
+                    <a class="dropdown-item" href="#"> ManuallyCompleted</a> </div>
+            </div> -->
+            <select class="btn  dropdown btn-secondary dropdown-toggle" name="option" [(ngModel)]="filters.status">
+                <option [value]="''">Choose Option</option>
+                <option [value]="'Uploaded'">Uploaded</option>
+                <option [value]="'PendingAnalysis'">PendingAnalysis</option>
+                <option [value]="'AutoAnalyzed'">AutoAnalyzed</option>
+                <option [value]="'ManuallyVerified'">ManuallyVerified</option>
+            </select>
+
+        </div>
+
+        <div class="col-md-2">
+            <label for="name">Functionality</label>
+            <select class="btn dropdown btn-secondary dropdown-toggle" name="option"
+                [(ngModel)]="filters.Functionality">
+                <option [value]="''">Choose Option</option>
+                <option [value]="'DNC'">DNC</option>
+                <option [value]="'BadNumber'"> Bad Number</option>
+                <option [value]="'CND'">CND</option>
+                <option [value]="'AutoPay'"> AutoPay</option>
+            </select>
+
+        </div>
+
+        <div class="input-group col-md-2">
+            <a href="">Advance Analytics</a>
+            <div>
+                <button class="btn btn-primary " type="submit" (click)="search()">Search</button> &nbsp;
+                <span class="" (click)="exportAsExcel()"><img [src]="'assets/img/xlsx.png'"
+                        style="width: 40px;height:38px;cursor: pointer;"></span>
+            </div>
+        </div>
+
+
+
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-12">
+            <table class="table table-striped table-sm">
+                <thead style="background-color: #0f4c75; color: white;">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col" *ngFor="let col of columns">{{col['label']}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of list;let i=index">
+                        <td scope="row">{{filters['currentPage']*10 + i +1}}</td>
+                        <td scope="row">{{item['batchId']}}</td>
+                        <td scope="row" (click)="openCall(i)" id="callId">{{item['callId']}}</td>
+                        <!-- <td scope="row">{{item['batchId']}}</td>
+                        <td scope="row">{{item['callId']}}</td> -->
+                        <td scope="row">{{item['uploadedOn'] | date:'medium'}}</td>
+                        <td scope="row">{{item['uploadedBy']}}</td>
+                        <td scope="row">{{item['processedOn'] | date:'medium'}}</td>
+                        <td scope="row">{{item['processedBy']}}</td>
+                        <td scope="row">{{item['Functionality']}}</td>
+                        <td scope="row">{{item['Score']}}</td>
+
+                        <td scope="row">{{item['status']}}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <pagination [currentPage]="filters['currentPage']+1" (gotoPage)="loadPage($event)"></pagination>
+        </div>
+    </div>
+
+</div>
